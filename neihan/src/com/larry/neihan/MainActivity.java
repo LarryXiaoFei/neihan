@@ -15,24 +15,17 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
 	
 	/**
-	 * ĞèÒªÊ¹ÓÃµ½µÄµÚÈı·½µÄÀà¿â£º
-	 * 1¡¢PullToRefresh
-	 * 2¡¢Gif¶¯»­µÄ²¥·Å£º£¨È¥È·¶¨µ½µ×Ê¹ÓÃÊ²Ã´¿â£©
-	 * 	MovieÀà Android×Ô´øµÄAPI¡£Ëü¿ÉÒÔ°ÑgifÎÄ¼şµÄÃ¿Ò»Ö¡½âÂë³öÀ´¡£
-	 *  Ê¹ÓÃµÚÈı·½µÄ¿â:GifView»òÕßÆäËûgifÎÄ¼şµÄ²¥·Å¿Ø¼ş
-	 *  Ê¹ÓÃWebView½øĞĞgifµÄ²¥·Å
-	 *  
-	 * 3¡¢ÎÄ¼şµÄÉÏ´«£ºÒªÊ¹ÓÃµÄÊÇHttpClient+HttpMime
-	 * 
-	 * 4¡¢VolleyµÄÀà¿â¡£
-	 * 5¡¢µÚÈı·½·ÖÏíÀà¿â£ºshareSDK(´ı½â¾ö)
+	 * ä¸æœåŠ¡å™¨æ¥å£å¯¹æ¥çš„é¡¹ç›®ï¼Œæ¥å£åº”è¯¥å¦‚ä½•å¼€å‘
+	 * aã€æœ‰æ²¡æœ‰ç™»å½•çš„æ¥å£ã€æ³¨å†Œæ¥å£
+	 * bã€æœ‰æ²¡æœ‰å‰ææ¡ä»¶æ¥å£ï¼Œä¾‹å¦‚è·å–é…ç½®ä¿¡æ¯çš„æ¥å£
+	 * cã€æœ‰æ²¡æœ‰é‰´æƒæ¥å£ï¼Œä¾‹å¦‚ç°åœ¨ å¸¸è§çš„ç¬¬ä¸‰æ–¹å¼€æ”¾çš„APIæ¥å£ï¼Œå¦‚æ–°æµªå¾®åšå­ç±»çš„OAuthæˆæƒæœºåˆ¶çš„æ¥å£
+	 * dã€æœ‰æ²¡æœ‰å…³é”®åˆ—æ•°æ®çš„æ¥å£ï¼šå†…æ¶µæ®µå­çš„åˆ—è¡¨ï¼Œä»¥åŠå†…æ¶µæ®µå­çš„è¯„è®ºï¼Œ
 	 * 
 	 */
 }
