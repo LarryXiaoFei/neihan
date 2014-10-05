@@ -65,7 +65,6 @@ public class TestActivity extends Activity implements Response.Listener<String> 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				ClientAPI.getComments(queue,groupID,offset,TestActivity.this);
-				
 			};
 		});
 	}
@@ -112,17 +111,22 @@ public class TestActivity extends Activity implements Response.Listener<String> 
 			arg0 = json.toString(4);
 			//解析获取到的评论列表
 			CommentList commentList =new CommentList();
-			Log.i("..............", arg0);
+			Log.i("TestActivity","---CommentList--->>" +arg0);
+			
+			//判断是否有的评论可以加载
 			if(!json.getBoolean("has_more")){						
 				Toast.makeText(TestActivity.this, "无更多评论可加载!!!", 1).show();				
 			}
+			
 			//评论列表包含两组数据，一个是热门评论列表，一个是新鲜评论
 			//两个都可能为空
 			//热门评论列表（可能为空，第一次 offset为0时可能有数据）
 			//新鲜评论，可能有数据
 			commentList.parseJson(json);
+			
 			Log.i("TestActivity", "--group_id:"+commentList.getGroupId()+"has_more:"+commentList.isHasMore()+"count:"+commentList.getTotalNumber());
 			//TODO 直接把 CommentEntityList提交给adapter这样可以进行是否还有内容的判断 利用adapter更新数据
+			
 			//分页标识 要求服务器每次返回20条 通过hasMore来进行判断是否还需要分页
 			offset=offset+20;
 			

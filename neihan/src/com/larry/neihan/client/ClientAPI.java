@@ -95,11 +95,10 @@ public class ClientAPI {
 				+ "&count=20&iid=2337593504&device_id=2757969807&ac=wifi&channel=wandoujia&aid=7&app_name=joke_essay&version_code=302&device_platform=android&device_type=KFTT&os_api=15&os_version=4.0.3&openudid=b90ca6a3a19a78d6";
 		queue.add(new StringRequest(Request.Method.GET, url, listener,
 				new Response.ErrorListener() {
-
 					@Override
 					public void onErrorResponse(VolleyError arg0) {
 						// TODO Auto-generated method stub
-
+							
 					}
 				}));
 	}

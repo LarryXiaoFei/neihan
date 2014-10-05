@@ -29,9 +29,12 @@ public class CommentList {
 	private List<Comment> topComments;
 
 	private List<Comment> recentComments;
-
+	
+	//段子的id
 	private long groupId;
+	//总的评论数
 	private int totalNumber;
+	//是否还有评论
 	private boolean hasMore;
 
 	public void parseJson(JSONObject json) throws JSONException {
@@ -43,7 +46,8 @@ public class CommentList {
 			hasMore = json.getBoolean("has_more");
 
 			JSONObject data = json.getJSONObject("data");
-
+			
+			//热门评论
 			JSONArray tArray = data.optJSONArray("top_comments");
 
 			if (tArray != null) {
@@ -59,7 +63,8 @@ public class CommentList {
 					}
 				}
 			}
-
+			
+			//最新评论
 			JSONArray rArray = data.optJSONArray("recent_comments");
 			if (rArray != null) {
 				recentComments = new LinkedList<Comment>();
@@ -74,7 +79,6 @@ public class CommentList {
 				}
 			}
 		}
-
 	}
 
 	public List<Comment> getTopComments() {
