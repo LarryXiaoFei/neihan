@@ -1,5 +1,6 @@
 package com.larry.neihan.bean;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ImageUrlList {
+public class ImageUrlList implements Serializable{
+
+	
+	private static final long serialVersionUID = 26348726L;
 
 	private List<String> largeImageUrls;
 	private String uri;

@@ -1,6 +1,8 @@
 package com.larry.neihan.bean;
 
-public class DuanziEntity {
+import java.io.Serializable;
+
+public class DuanziEntity implements Serializable{
 	
 	private int type;
 	

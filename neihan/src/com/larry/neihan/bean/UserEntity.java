@@ -1,9 +1,15 @@
 package com.larry.neihan.bean;
 
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserEntity {
+public class UserEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4953048882981290610L;
 	/**
 	 * 头像网址
 	 */

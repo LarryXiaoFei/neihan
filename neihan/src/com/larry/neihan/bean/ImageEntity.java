@@ -1,10 +1,16 @@
 package com.larry.neihan.bean;
 
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ImageEntity extends TextEntity {
+public class ImageEntity extends TextEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4866821149580749088L;
 	private ImageUrlList largeList;
 	private ImageUrlList middleList;
 
@@ -22,12 +28,12 @@ public class ImageEntity extends TextEntity {
 		JSONObject group = item.getJSONObject("group");
 		JSONObject largeImage = group.optJSONObject("large_image");
 		JSONObject middleImage = group.optJSONObject("middle_image");
-		
+
 		largeList = new ImageUrlList();
 		if (largeImage != null) {
 			largeList.parseJson(largeImage);
 		}
-		
+
 		middleList = new ImageUrlList();
 		if (middleImage != null) {
 			middleList.parseJson(middleImage);

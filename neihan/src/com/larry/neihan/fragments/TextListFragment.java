@@ -1,11 +1,11 @@
 package com.larry.neihan.fragments;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -16,9 +16,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.Listener;
@@ -27,11 +28,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.larry.neihan.R;
+import com.larry.neihan.activities.EssayDetailActivity;
 import com.larry.neihan.adapters.EssayAdapter;
+import com.larry.neihan.bean.DataStore;
 import com.larry.neihan.bean.EntityList;
 import com.larry.neihan.bean.TextEntity;
 import com.larry.neihan.client.ClientAPI;
-import com.larry.neihan.test.TestActivity;
 
 /**
  * 1、列表界面，第一次启动数据为空的时候，自动加载数据 2、只要列表没有数据，进入这个界面的时候，就尝试加载数据 3、只要有数据就不进行数据的加载
@@ -40,13 +42,13 @@ import com.larry.neihan.test.TestActivity;
  * @author aaa 如果我们对成员变量不进行数据清空的话，它不会被清空
  */
 public class TextListFragment extends Fragment implements OnClickListener,
-		OnScrollListener, OnRefreshListener2<ListView> {
+		OnScrollListener, OnRefreshListener2<ListView>, OnItemClickListener {
 
 	private View quickTools;
 	private TextView textNotify;
 	private View header;
 	private EssayAdapter adapter;
-	private List<TextEntity> entities;
+	// private List<TextEntity> entities;
 
 	/**
 	 * 分类ID,1 代表文本
@@ -120,17 +122,40 @@ public class TextListFragment extends Fragment implements OnClickListener,
 		listView.addHeaderView(header);
 
 		// 判断entities是否为空，为空的时候再去创建adapter的数据List<TextEntity>
-		if (entities == null) {
-			entities = new LinkedList<TextEntity>();
-		}
+
+		List<TextEntity> entities = DataStore.getInstance().getTextEntities();
+
+		/*
+		 * if (entities == null) { entities = new LinkedList<TextEntity>(); }
+		 */
 
 		// 创建适配器
 		adapter = new EssayAdapter(getActivity(), entities);
+
 		// 给listView设置适配器
 		listView.setAdapter(adapter);
+		adapter.setListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (v instanceof TextView) {
+					String string = (String) v.getTag();
+					int position = Integer.parseInt(string);
+
+					if (string != null) {
+						Intent intent = new Intent(getActivity(),
+								EssayDetailActivity.class);
+						intent.putExtra("currentEssayPostion", position);
+						intent.putExtra("category", requestCategory);
+						startActivity(intent);
+					}
+				}
+			}
+		});
+
 		// 给listView添加滚动事件的监听
 		listView.setOnScrollListener(this);
-
+		listView.setOnItemClickListener(this);
 		// 获取发布的View对象
 		View quickPublish = header.findViewById(R.id.quick_tools_publish);
 		quickPublish.setOnClickListener(this);
@@ -257,6 +282,8 @@ public class TextListFragment extends Fragment implements OnClickListener,
 		try {
 			JSONObject json = new JSONObject(arg0);
 			arg0 = json.toString(4);
+			Log.d("MainActivity","--json--"+arg0);
+			
 			// 获取根节点下的data
 			JSONObject obj = json.getJSONObject("data");
 			// 创建EntityList对象，用于保存，网络段子的数据
@@ -283,7 +310,9 @@ public class TextListFragment extends Fragment implements OnClickListener,
 					/**
 					 * 把ets中内容按照迭代器的顺序进行添加，这个需要验证一下
 					 */
-					entities.addAll(0, ets);
+					DataStore.getInstance().addTextEntities(ets);
+
+					// entities.addAll(0, ets);
 					// 手动添加
 					// 把object添加到指定的location位置，
 					// 原有的location以及以后的内容向后移动
@@ -329,5 +358,17 @@ public class TextListFragment extends Fragment implements OnClickListener,
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 		// TODO
 
+	}
+
+	// ======================ListView的setOnItemClickListener的接口事件============================
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+
+		arg2--;
+		//
+		// Intent intent = new Intent(getActivity(), EssayDetailActivity.class);
+		// intent.putExtra("currentEssayPostion", arg2);
+		// intent.putExtra("category", requestCategory);
 	}
 }

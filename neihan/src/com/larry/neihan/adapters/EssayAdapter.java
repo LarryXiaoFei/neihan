@@ -3,15 +3,10 @@ package com.larry.neihan.adapters;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
-
-import com.larry.neihan.R;
-import com.larry.neihan.bean.TextEntity;
-import com.larry.neihan.bean.UserEntity;
-
 import android.content.Context;
-import android.renderscript.Program;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -19,6 +14,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.larry.neihan.R;
+import com.larry.neihan.bean.TextEntity;
+import com.larry.neihan.bean.UserEntity;
 
 public class EssayAdapter extends BaseAdapter {
 
@@ -28,12 +27,18 @@ public class EssayAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater;
 
+	private OnClickListener listener;
+	
+	public void setListener(OnClickListener listener) {
+		this.listener = listener;
+	}
+
 	public EssayAdapter(Context context, List<TextEntity> entities) {
 		this.context = context;
 		this.entities = entities;
 		inflater = LayoutInflater.from(context);
 	}
-
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -89,6 +94,7 @@ public class EssayAdapter extends BaseAdapter {
 
 				holder.txtContent = (TextView) ret
 						.findViewById(R.id.item_content);
+				
 				holder.txtProfileNick = (TextView) ret
 						.findViewById(R.id.item_profile_nick);
 
@@ -108,6 +114,10 @@ public class EssayAdapter extends BaseAdapter {
 			String content = entity.getContent();
 			holder.txtContent.setText(content);
 
+			holder.txtContent.setOnClickListener(listener);
+			holder.txtContent.setTag(Integer.toString(position));
+			
+			
 			int diggCount = entity.getDiggCount();
 			holder.chbDiggCount.setText(Integer.toString(diggCount));
 			/**

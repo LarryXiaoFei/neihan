@@ -1,5 +1,6 @@
 package com.larry.neihan.bean;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import org.json.JSONObject;
 import android.R.integer;
 import android.util.Log;
 
-public class EntityList {
+public class EntityList implements Serializable{
 
 	private boolean hasMore;
 	private long minTime;

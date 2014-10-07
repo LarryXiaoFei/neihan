@@ -13,7 +13,11 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="我要投稿" />
-
+	<View
+	    android:layout_width="2dp"
+	    android:layout_height="match_parent"
+	    android:background="#f00" 
+	    />
     <TextView
         android:id="@+id/quick_tools_review"
         android:layout_width="0dp"
