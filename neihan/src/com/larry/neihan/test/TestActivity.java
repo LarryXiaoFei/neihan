@@ -32,10 +32,10 @@ public class TestActivity extends Activity implements Response.Listener<String> 
 	 */
 	public static final int CATEGORY_IMAGE = 2;
 	private RequestQueue queue;
-
+	private long lastTime = 0L;
 	private Button button;
 	private int itemCount;
-	private long lastTime = 0L;
+	
 	private long groupID;
 	private int offset;
 
