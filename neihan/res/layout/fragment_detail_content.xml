@@ -23,7 +23,7 @@
              android:layout_height="wrap_content"
              android:text="热门评论"
              />
-         <ListView 
+         <com.larry.neihan.view.MyListView 
              android:id="@+id/hot_comments_list"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
